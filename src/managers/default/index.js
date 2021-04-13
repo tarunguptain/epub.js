@@ -772,9 +772,9 @@ class DefaultViewManager {
 			let mapping = this.mapping.page(view.contents, view.section.cfiBase, start, end);
 
 			let totalPages = this.layout.count(width).pages;
-			let startPage = Math.floor(start / this.layout.pageWidth);
+			let startPage = Math.round(start / this.layout.pageWidth);
 			let pages = [];
-			let endPage = Math.floor(end / this.layout.pageWidth);
+			let endPage = Math.round(end / this.layout.pageWidth);
 			
 			// start page should not be negative
 			if (startPage < 0) {
