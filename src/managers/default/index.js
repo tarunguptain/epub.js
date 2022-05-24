@@ -454,9 +454,11 @@ class DefaultViewManager {
 
 		if(this.isPaginated && this.settings.axis === "horizontal" && (!dir || dir === "ltr")) {
 
-			this.scrollLeft = this.container.scrollLeft;
+			// Zoom in and out in Chrome browser make the pixels shift, added a rounding technique to convert the decimal scrollLeft
+			// number to whole which is also perfectly divided by offsetWidth (page width)
+			this.scrollLeft = window.devicePixelRatio !== 1 ? Math.round(this.container.scrollLeft / this.container.offsetWidth) * this.container.offsetWidth : this.container.scrollLeft;
 
-			left = this.container.scrollLeft + this.container.offsetWidth + this.layout.delta;
+			left = this.scrollLeft + this.container.offsetWidth + this.layout.delta;
 
 			if(left <= this.container.scrollWidth) {
 				this.scrollBy(this.layout.delta, 0, true);
@@ -465,10 +467,12 @@ class DefaultViewManager {
 			}
 		} else if (this.isPaginated && this.settings.axis === "horizontal" && dir === "rtl") {
 
-			this.scrollLeft = this.container.scrollLeft;
+			// Zoom in and out in Chrome browser make the pixels shift, added a rounding technique to convert the decimal scrollLeft
+			// number to whole which is also perfectly divided by offsetWidth (page width)
+			this.scrollLeft = window.devicePixelRatio !== 1 ? Math.round(this.container.scrollLeft / this.container.offsetWidth) * this.container.offsetWidth : this.container.scrollLeft;
 
 			if (this.settings.rtlScrollType === "default"){
-				left = this.container.scrollLeft;
+				left = this.scrollLeft;
 
 				if (left > 0) {
 					this.scrollBy(this.layout.delta, 0, true);
@@ -476,7 +480,7 @@ class DefaultViewManager {
 					next = this.views.last().section.next();
 				}
 			} else {
-				left = this.container.scrollLeft + ( this.layout.delta * -1 );
+				left = this.scrollLeft + ( this.layout.delta * -1 );
 
 				if (left > this.container.scrollWidth * -1){
 					this.scrollBy(this.layout.delta, 0, true);
