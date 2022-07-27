@@ -770,7 +770,7 @@ class DefaultViewManager {
 				start = end - pageWidth;
 			} else {
 				offset = container.left + left;
-				pageWidth = Math.min(position.right - offset, this.layout.width) - used;
+				pageWidth = Math.min(position.right - offset - used, this.layout.width);
 				start = offset - position.left + used;
 				end = start + pageWidth;
 			}
