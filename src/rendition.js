@@ -36,6 +36,9 @@ import ContinuousViewManager from "./managers/continuous/index";
  * @param {boolean} [options.resizeOnOrientationChange] false to disable orientation events
  * @param {string} [options.script] url of script to be injected
  * @param {boolean | object} [options.snap=false] use snap scrolling
+ * @param {string} [options.defaultDirection='ltr'] default text direction
+ * @param {boolean} [options.allowScriptedContent=false] enable running scripts in content
+ * @param {boolean} [options.allowPopups=false] enable opening popup in content
  */
 class Rendition {
 	constructor(book, options) {
@@ -54,7 +57,9 @@ class Rendition {
 			resizeOnOrientationChange: true,
 			script: null,
 			snap: false,
-			defaultDirection: "ltr"
+			defaultDirection: "ltr",
+			allowScriptedContent: false,
+			allowPopups: false
 		});
 
 		extend(this.settings, options);
@@ -892,7 +897,7 @@ class Rendition {
 	 */
 	triggerSelectedEvent(cfirange, contents){
 		/**
-		 * Emit that a text selection has occured
+		 * Emit that a text selection has occurred
 		 * @event selected
 		 * @param {string} cfirange
 		 * @param {Contents} contents

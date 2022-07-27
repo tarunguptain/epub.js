@@ -25,12 +25,15 @@ export interface RenditionOptions {
   overflow?: string,
   snap?: boolean | object,
   defaultDirection?: string,
+  allowScriptedContent?: boolean
 }
 
 export interface DisplayedLocation {
   index: number,
   href: string,
   cfi: string,
+  location: number,
+  percentage: number,
   displayed: {
     page: number,
     total: number
