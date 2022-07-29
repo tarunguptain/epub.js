@@ -91,7 +91,8 @@ class IframeView {
 		this.iframe.style.border = "none";
 
 		// sandbox
-		this.iframe.sandbox = "allow-same-origin";
+		// This causing issues with safari browser
+		// this.iframe.sandbox = "allow-same-origin";
 		if (this.settings.allowScriptedContent) {
 			this.iframe.sandbox += " allow-scripts";
 		}
