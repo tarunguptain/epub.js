@@ -91,20 +91,13 @@ class IframeView {
 		this.iframe.style.border = "none";
 
 		// sandbox
-		// if allowScriptedContent is true then do not apply sandbox as allow-same-origin and allow-scripts would cause iframe to escape sandboxing
-		// it will be as good as not applying the sandboxing at all
-		if (!this.settings.allowScriptedContent) {
-			this.iframe.sandbox = "allow-same-origin";
-			if (this.settings.allowPopups) {
-				this.iframe.sandbox += " allow-popups";
-			}
+		this.iframe.sandbox = "allow-same-origin";
+		if (this.settings.allowScriptedContent) {
+			this.iframe.sandbox += " allow-scripts";
 		}
-		// if (this.settings.allowScriptedContent) {
-		// 	this.iframe.sandbox += " allow-scripts";
-		// }
-		// if (this.settings.allowPopups) {
-		// 	this.iframe.sandbox += " allow-popups";
-		// }
+		if (this.settings.allowPopups) {
+			this.iframe.sandbox += " allow-popups";
+		}
 		
 		this.iframe.setAttribute("enable-annotation", "true");
 
